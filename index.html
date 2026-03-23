@@ -1,813 +1,253 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Material You — Theme</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<style>
-:root {
-  --transition: 0.3s cubic-bezier(.4,0,.2,1);
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hollow Launcher</title>
 
-/* ── LIGHT ── */
-[data-theme="light"] {
-  --bg: #FFFFFF;
-  --bg-paper: #FFFFFF;
-  --bg-surface1: #F3F3F7;
-  --bg-surface2: #ECEEF8;
-  --primary: #1A73E8;
-  --primary-container: #D3E3FD;
-  --on-primary-container: #0842A0;
-  --secondary: #D93025;
-  --text: #202124;
-  --text-secondary: #5F6368;
-  --divider: rgba(0,0,0,0.10);
-  --border: rgba(0,0,0,0.08);
-  --appbar: #FFFFFF;
-  --drawer: #FFFFFF;
-  --chip-bg: #E8F0FE;
-  --chip-text: #1A73E8;
-  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
-  --ripple: rgba(26,115,232,0.1);
-  --icon-fill: #5F6368;
-  --fab-shadow: 0 3px 12px rgba(26,115,232,0.35);
-  --search-bg: #F1F3F4;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
 
-/* ── DARK ── */
-[data-theme="dark"] {
-  --bg: #121212;
-  --bg-paper: #1E1E1E;
-  --bg-surface1: #2A2A2A;
-  --bg-surface2: #303030;
-  --primary: #A8C7FA;
-  --primary-container: #0842A0;
-  --on-primary-container: #D3E3FD;
-  --secondary: #F28B82;
-  --text: #E8EAED;
-  --text-secondary: #9AA0A6;
-  --divider: rgba(255,255,255,0.10);
-  --border: rgba(255,255,255,0.08);
-  --appbar: #1F1F1F;
-  --drawer: #1E1E1E;
-  --chip-bg: rgba(168,199,250,0.15);
-  --chip-text: #A8C7FA;
-  --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3);
-  --ripple: rgba(168,199,250,0.12);
-  --icon-fill: #9AA0A6;
-  --fab-shadow: 0 3px 14px rgba(168,199,250,0.3);
-  --search-bg: #2A2A2A;
-}
+    body {
+      background: radial-gradient(circle at top, #111 0%, #0a0a0a 100%);
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-/* ── OLED ── */
-[data-theme="oled"] {
-  --bg: #000000;
-  --bg-paper: #000000;
-  --bg-surface1: #111111;
-  --bg-surface2: #1A1A1A;
-  --primary: #A8C7FA;
-  --primary-container: #0842A0;
-  --on-primary-container: #D3E3FD;
-  --secondary: #F28B82;
-  --text: #E8EAED;
-  --text-secondary: #9AA0A6;
-  --divider: rgba(255,255,255,0.07);
-  --border: rgba(255,255,255,0.07);
-  --appbar: #000000;
-  --drawer: #000000;
-  --chip-bg: rgba(168,199,250,0.12);
-  --chip-text: #A8C7FA;
-  --shadow: 0 1px 4px rgba(0,0,0,0.8);
-  --ripple: rgba(168,199,250,0.1);
-  --icon-fill: #9AA0A6;
-  --fab-shadow: 0 3px 14px rgba(168,199,250,0.25);
-  --search-bg: #111111;
-}
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { font-size:16px; }
+    /* NAVBAR */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      backdrop-filter: blur(8px);
+    }
 
-body {
-  font-family: 'Google Sans', 'Roboto', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  transition: background var(--transition), color var(--transition);
-}
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      transition: 0.3s;
+    }
 
-/* ── LAYOUT ── */
-.shell { display:flex; height:100vh; overflow:hidden; }
+    nav a:hover {
+      color: #fff;
+    }
 
-/* ── NAVIGATION DRAWER ── */
-.drawer {
-  width: 256px;
-  flex-shrink: 0;
-  background: var(--drawer);
-  border-right: 1px solid var(--border);
-  display:flex; flex-direction:column;
-  padding: 12px 12px;
-  overflow-y: auto;
-  transition: background var(--transition), border-color var(--transition);
-}
-.drawer-header {
-  display:flex; align-items:center; gap:10px;
-  padding: 16px 4px 20px;
-}
-.drawer-logo {
-  width:32px; height:32px; border-radius:8px;
-  background: var(--primary);
-  display:flex; align-items:center; justify-content:center;
-  color:#fff; font-weight:700; font-size:14px;
-}
-.drawer-app-name { font-size:15px; font-weight:500; letter-spacing:-.2px; }
+    /* HERO */
+    .hero {
+      text-align: center;
+      margin-top: 100px;
+      animation: fadeUp 1s ease;
+    }
 
-.nav-section-label {
-  font-size:11px; letter-spacing:.8px; text-transform:uppercase;
-  color:var(--text-secondary); padding: 16px 16px 6px;
-  font-weight:500;
-}
-.nav-item {
-  display:flex; align-items:center; gap:12px;
-  padding: 10px 16px;
-  border-radius: 50px;
-  cursor:pointer;
-  font-size:14px; font-weight:500;
-  color:var(--text-secondary);
-  transition: background var(--transition), color var(--transition);
-  position:relative;
-  overflow:hidden;
-  user-select:none;
-}
-.nav-item:hover { background:var(--bg-surface1); color:var(--text); }
-.nav-item.active {
-  background: var(--primary-container);
-  color: var(--on-primary-container);
-}
-.nav-item.active .nav-icon { color: var(--on-primary-container); }
-.nav-icon {
-  font-size:20px !important;
-  color:var(--icon-fill);
-  transition: color var(--transition);
-}
-.nav-item.active .nav-icon, .nav-item:hover .nav-icon { color:inherit; }
-.nav-badge {
-  margin-left:auto;
-  background:var(--primary);
-  color:#fff;
-  font-size:10px; font-weight:700;
-  padding:2px 7px; border-radius:99px;
-  min-width:20px; text-align:center;
-}
-[data-theme="light"] .nav-badge { color:#fff; }
-[data-theme="dark"] .nav-badge, [data-theme="oled"] .nav-badge { color:#000; }
+    .hero h1 {
+      font-size: 64px;
+      letter-spacing: 1px;
+    }
 
-.drawer-divider { height:1px; background:var(--divider); margin:12px 0; }
+    .hero p {
+      opacity: 0.7;
+      font-size: 18px;
+      margin-top: 10px;
+    }
 
-/* ── MAIN AREA ── */
-.main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 32px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: 0.3s;
+    }
 
-/* ── APP BAR ── */
-.appbar {
-  height:64px;
-  background:var(--appbar);
-  border-bottom:1px solid var(--border);
-  display:flex; align-items:center; gap:12px;
-  padding:0 16px 0 24px;
-  flex-shrink:0;
-  transition:background var(--transition), border-color var(--transition);
-}
-.appbar-title { font-size:22px; font-weight:400; font-family:'Google Sans Display', 'Google Sans', sans-serif; flex:1; }
+    .btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-3px);
+    }
 
-/* Search bar */
-.search-bar {
-  display:flex; align-items:center; gap:8px;
-  background:var(--search-bg);
-  border-radius:999px;
-  padding:8px 16px;
-  width:320px;
-  transition:background var(--transition), box-shadow 0.2s;
-  cursor:text;
-}
-.search-bar:hover { box-shadow:0 1px 4px var(--divider); }
-.search-bar input {
-  border:none; background:transparent;
-  color:var(--text); font-family:inherit; font-size:14px;
-  outline:none; flex:1;
-}
-.search-bar input::placeholder { color:var(--text-secondary); }
-.search-icon { color:var(--icon-fill); font-size:20px !important; }
+    /* SECTIONS */
+    .section {
+      margin-top: 120px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 0.6s ease;
+    }
 
-/* Icon buttons */
-.icon-btn {
-  width:40px; height:40px; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer; border:none; background:transparent;
-  color:var(--icon-fill);
-  transition:background var(--transition);
-}
-.icon-btn:hover { background:var(--bg-surface1); }
-.icon-btn .material-symbols-rounded { font-size:22px; }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-/* Avatar */
-.avatar {
-  width:36px; height:36px; border-radius:50%;
-  background:linear-gradient(135deg,#1A73E8,#8AB4F8);
-  display:flex; align-items:center; justify-content:center;
-  color:#fff; font-size:14px; font-weight:600; cursor:pointer;
-  flex-shrink:0;
-}
+    h2 {
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
 
-/* ── CONTENT ── */
-.content {
-  flex:1; overflow-y:auto; padding:24px;
-  background:var(--bg);
-  transition:background var(--transition);
-}
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
 
-/* ── THEME SWITCHER ── */
-.theme-switcher {
-  display:flex; gap:8px; align-items:center; margin-left:auto;
-}
-.theme-pill {
-  padding:6px 14px; border-radius:999px;
-  font-size:12px; font-weight:500; cursor:pointer;
-  border:1px solid var(--border);
-  background:transparent; color:var(--text-secondary);
-  font-family:inherit;
-  transition:all var(--transition);
-}
-.theme-pill.active {
-  background:var(--primary);
-  color:#fff; border-color:var(--primary);
-}
-[data-theme="dark"] .theme-pill.active,
-[data-theme="oled"] .theme-pill.active { color:#000; }
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 25px;
+      border-radius: 14px;
+      backdrop-filter: blur(6px);
+      transition: 0.3s;
+    }
 
-/* ── GRID / CARDS ── */
-.section-title {
-  font-family:'Google Sans Display','Google Sans',sans-serif;
-  font-size:20px; font-weight:500; margin-bottom:16px;
-  color:var(--text);
-}
-.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px; }
-.grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:24px; }
+    .card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(255,255,255,0.2);
+    }
 
-.card {
-  background:var(--bg-paper);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:20px;
-  transition:background var(--transition), border-color var(--transition), box-shadow 0.2s;
-}
-.card:hover { box-shadow:var(--shadow); }
-.card-title { font-size:14px; font-weight:500; color:var(--text-secondary); margin-bottom:6px; }
-.card-value { font-family:'Google Sans Display','Google Sans',sans-serif; font-size:28px; font-weight:500; color:var(--text); }
-.card-sub { font-size:12px; color:var(--text-secondary); margin-top:4px; display:flex; align-items:center; gap:4px; }
-.trend-up { color:#34A853; }
-.trend-down { color:#D93025; }
+    /* PREVIEW */
+    .preview {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(4px);
+      transition: 0.3s;
+    }
 
-/* Stat icon */
-.card-icon {
-  width:44px; height:44px; border-radius:12px;
-  display:flex; align-items:center; justify-content:center;
-  margin-bottom:14px;
-}
-.icon-blue { background:rgba(26,115,232,.12); color:#1A73E8; }
-.icon-green { background:rgba(52,168,83,.12); color:#34A853; }
-.icon-red { background:rgba(217,48,37,.12); color:#D93025; }
-.icon-yellow { background:rgba(251,188,4,.12); color:#F9AB00; }
-[data-theme="dark"] .icon-blue,[data-theme="oled"] .icon-blue { background:rgba(168,199,250,.12); color:#A8C7FA; }
-[data-theme="dark"] .icon-red,[data-theme="oled"] .icon-red { background:rgba(242,139,130,.12); color:#F28B82; }
+    .preview:hover {
+      transform: scale(1.01);
+    }
 
-/* ── CHIPS ── */
-.chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
-.chip {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:6px 14px; border-radius:999px;
-  font-size:13px; font-weight:500;
-  border:1px solid var(--border);
-  cursor:pointer;
-  background:transparent; color:var(--text-secondary);
-  font-family:inherit;
-  transition:all var(--transition);
-}
-.chip:hover { background:var(--bg-surface1); color:var(--text); }
-.chip.selected { background:var(--chip-bg); color:var(--chip-text); border-color:var(--chip-bg); }
-.chip .material-symbols-rounded { font-size:16px !important; }
+    /* DOWNLOAD */
+    .download-box {
+      background: rgba(255,255,255,0.05);
+      padding: 40px;
+      border-radius: 14px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
 
-/* ── BUTTONS ── */
-.btn-row { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; align-items:center; }
-.btn {
-  display:inline-flex; align-items:center; gap:7px;
-  padding:9px 20px; border-radius:999px;
-  font-size:14px; font-weight:500; font-family:inherit;
-  cursor:pointer; border:none; outline:none;
-  transition:all var(--transition);
-  position:relative; overflow:hidden;
-}
-.btn-filled {
-  background:var(--primary); color:#fff;
-}
-[data-theme="dark"] .btn-filled,[data-theme="oled"] .btn-filled { color:#000; }
-.btn-filled:hover { filter:brightness(1.08); box-shadow:0 2px 8px rgba(26,115,232,.3); }
-.btn-tonal {
-  background:var(--primary-container); color:var(--on-primary-container);
-}
-.btn-tonal:hover { filter:brightness(.97); }
-.btn-outlined {
-  background:transparent; color:var(--primary); border:1px solid var(--border);
-}
-.btn-outlined:hover { background:var(--ripple); }
-.btn-text { background:transparent; color:var(--primary); }
-.btn-text:hover { background:var(--ripple); }
-.btn-error { background:var(--secondary); color:#fff; }
-.btn-error:hover { filter:brightness(1.08); }
-[data-theme="dark"] .btn-error,[data-theme="oled"] .btn-error { color:#1a0000; }
-.btn .material-symbols-rounded { font-size:17px !important; }
+    /* FOOTER */
+    footer {
+      margin-top: 120px;
+      padding: 30px 0;
+      text-align: center;
+      opacity: 0.5;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
 
-/* ── FAB ── */
-.fab {
-  width:56px; height:56px; border-radius:16px;
-  display:inline-flex; align-items:center; justify-content:center;
-  background:var(--primary-container); color:var(--on-primary-container);
-  cursor:pointer; box-shadow:var(--fab-shadow);
-  transition:all var(--transition);
-  border:none; font-family:inherit;
-}
-.fab:hover { transform:scale(1.05); }
-.fab .material-symbols-rounded { font-size:24px !important; }
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-/* Extended FAB */
-.fab-ext {
-  display:inline-flex; align-items:center; gap:10px;
-  padding:0 20px 0 16px; height:56px; border-radius:16px;
-  background:var(--primary-container); color:var(--on-primary-container);
-  cursor:pointer; box-shadow:var(--fab-shadow);
-  transition:all var(--transition);
-  border:none; font-family:inherit;
-  font-size:15px; font-weight:500;
-}
-.fab-ext:hover { transform:translateY(-2px); }
+  </style>
 
-/* ── LIST CARD ── */
-.list-card {
-  background:var(--bg-paper);
-  border:1px solid var(--border);
-  border-radius:16px;
-  overflow:hidden;
-  margin-bottom:24px;
-  transition:background var(--transition), border-color var(--transition);
-}
-.list-item {
-  display:flex; align-items:center; gap:14px;
-  padding:14px 20px;
-  border-bottom:1px solid var(--divider);
-  transition:background var(--transition);
-  cursor:pointer;
-}
-.list-item:last-child { border-bottom:none; }
-.list-item:hover { background:var(--bg-surface1); }
-.list-avatar {
-  width:40px; height:40px; border-radius:50%; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  font-weight:600; font-size:15px; color:#fff;
-}
-.list-content { flex:1; }
-.list-primary { font-size:14px; font-weight:500; color:var(--text); }
-.list-secondary { font-size:12px; color:var(--text-secondary); margin-top:2px; }
-.list-meta { font-size:11px; color:var(--text-secondary); }
-
-/* ── PROGRESS / INDICATORS ── */
-.progress-label { font-size:13px; color:var(--text-secondary); margin-bottom:6px; font-weight:500; }
-.progress-bar {
-  height:6px; border-radius:999px; background:var(--bg-surface2);
-  overflow:hidden; margin-bottom:16px;
-}
-.progress-fill {
-  height:100%; border-radius:999px;
-  background:var(--primary);
-  transition:width 1.2s cubic-bezier(.4,0,.2,1);
-}
-.progress-fill.green { background:#34A853; }
-.progress-fill.red { background:var(--secondary); }
-.progress-fill.yellow { background:#F9AB00; }
-
-/* ── SWITCH ── */
-.switch-row { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
-.switch-label { font-size:14px; color:var(--text); flex:1; }
-.switch {
-  position:relative; width:52px; height:28px; flex-shrink:0;
-}
-.switch input { opacity:0; width:0; height:0; }
-.switch-track {
-  position:absolute; inset:0;
-  background:var(--bg-surface2); border-radius:999px;
-  border:2px solid var(--text-secondary);
-  cursor:pointer;
-  transition:background var(--transition), border-color var(--transition);
-}
-.switch input:checked + .switch-track { background:var(--primary); border-color:var(--primary); }
-.switch-thumb {
-  position:absolute; top:4px; left:4px;
-  width:16px; height:16px; border-radius:50%;
-  background:var(--text-secondary);
-  transition:transform var(--transition), background var(--transition), width 0.15s;
-  pointer-events:none;
-}
-.switch input:checked ~ .switch-thumb { transform:translateX(24px); background:#fff; }
-[data-theme="dark"] .switch input:checked ~ .switch-thumb,
-[data-theme="oled"] .switch input:checked ~ .switch-thumb { background:#000; }
-
-/* ── BADGE ── */
-.badge { display:inline-flex; position:relative; }
-.badge-dot {
-  position:absolute; top:-2px; right:-2px;
-  width:8px; height:8px; border-radius:50%;
-  background:var(--secondary); border:2px solid var(--bg);
-}
-.badge-num {
-  position:absolute; top:-6px; right:-10px;
-  background:var(--secondary); color:#fff;
-  font-size:10px; font-weight:700;
-  padding:1px 5px; border-radius:999px;
-  min-width:18px; text-align:center;
-  border:2px solid var(--bg);
-}
-
-/* ── DIVIDER ── */
-hr.divider { border:none; border-top:1px solid var(--divider); margin:8px 0; }
-
-/* ── SNACKBAR (bottom) ── */
-.snackbar {
-  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
-  background:var(--bg-surface2); color:var(--text);
-  padding:12px 20px; border-radius:12px;
-  font-size:14px; display:flex; align-items:center; gap:14px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.25);
-  z-index:999;
-  border:1px solid var(--border);
-  opacity:0; pointer-events:none;
-  transition:opacity 0.3s, transform 0.3s;
-  transform:translateX(-50%) translateY(20px);
-}
-.snackbar.show { opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
-.snackbar-action { color:var(--primary); font-weight:500; cursor:pointer; }
-
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar { width:4px; }
-::-webkit-scrollbar-track { background:transparent; }
-::-webkit-scrollbar-thumb { background:var(--divider); border-radius:99px; }
-
-/* ── RIPPLE ── */
-@keyframes ripple-anim {
-  from { transform:scale(0); opacity:0.25; }
-  to   { transform:scale(4); opacity:0; }
-}
-.ripple-effect {
-  position:absolute; border-radius:50%;
-  background:var(--primary); pointer-events:none;
-  animation:ripple-anim 0.5s ease-out;
-}
-
-/* ── ANIMATED ENTRY ── */
-@keyframes fade-in-up { from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;} }
-.animate-in { animation:fade-in-up 0.4s ease both; }
-.d1{animation-delay:.05s} .d2{animation-delay:.1s} .d3{animation-delay:.15s}
-.d4{animation-delay:.2s} .d5{animation-delay:.25s} .d6{animation-delay:.3s}
-</style>
 </head>
-<body data-theme="light">
 
-<div class="shell">
-  <!-- ── NAVIGATION DRAWER ── -->
-  <div class="drawer">
-    <div class="drawer-header">
-      <div class="drawer-logo">M</div>
-      <span class="drawer-app-name">Material You</span>
-    </div>
+<body>
 
-    <div class="nav-section-label">Main</div>
-    <div class="nav-item active" onclick="setPage(this,'Dashboard')">
-      <span class="material-symbols-rounded nav-icon" style="font-variation-settings:'FILL' 1">dashboard</span>
-      Dashboard
-    </div>
-    <div class="nav-item" onclick="setPage(this,'Analytics')">
-      <span class="material-symbols-rounded nav-icon">bar_chart</span>
-      Analytics
-      <span class="nav-badge">3</span>
-    </div>
-    <div class="nav-item" onclick="setPage(this,'Messages')">
-      <span class="material-symbols-rounded nav-icon">chat_bubble</span>
-      Messages
-      <span class="nav-badge">12</span>
-    </div>
-    <div class="nav-item" onclick="setPage(this,'Files')">
-      <span class="material-symbols-rounded nav-icon">folder</span>
-      Files
-    </div>
+  <div class="container">
 
-    <div class="drawer-divider"></div>
-    <div class="nav-section-label">System</div>
+```
+<!-- HEADER -->
+<header>
+  <h3>Hollow Launcher</h3>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#preview">Preview</a>
+    <a href="#download">Download</a>
+  </nav>
+</header>
 
-    <div class="nav-item" onclick="setPage(this,'Calendar')">
-      <span class="material-symbols-rounded nav-icon">calendar_month</span>
-      Calendar
-    </div>
-    <div class="nav-item" onclick="setPage(this,'Settings')">
-      <span class="material-symbols-rounded nav-icon">settings</span>
-      Settings
-    </div>
+<!-- HERO -->
+<section class="hero">
+  <h1>Hollow Launcher</h1>
+  <p>Minimal. Fast. Minecraft Launcher for Vanilla & Fabric.</p>
+  <a href="https://github.com/yourusername/hollow-launcher/releases/latest" class="btn">
+    Download Now
+  </a>
+</section>
 
-    <div style="flex:1"></div>
-    <div class="drawer-divider"></div>
-    <div class="nav-item" onclick="setPage(this,'Profile')">
-      <span class="material-symbols-rounded nav-icon">account_circle</span>
-      Ashmeet
-    </div>
+<!-- FEATURES -->
+<section id="features" class="section">
+  <h2>Features</h2>
+  <div class="features">
+    <div class="card">⚡ Ultra fast performance</div>
+    <div class="card">🧩 Full Fabric support</div>
+    <div class="card">🎮 Vanilla ready</div>
+    <div class="card">🖥 Clean UI with subtle blur</div>
+    <div class="card">📦 Instance management (planned)</div>
+    <div class="card">🔒 Safe & simple downloads</div>
+  </div>
+</section>
+
+<!-- PREVIEW -->
+<section id="preview" class="section">
+  <h2>Preview</h2>
+  <img src="https://via.placeholder.com/1000x500" class="preview">
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download" class="section">
+  <h2>Download</h2>
+  <div class="download-box">
+    <p>Get the latest version of Hollow Launcher</p>
+    <a href="https://github.com/yourusername/hollow-launcher/releases/latest" class="btn">
+      Download for Windows
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 Hollow Launcher • Built by Ashmeet
+</footer>
+```
+
   </div>
 
-  <!-- ── MAIN ── -->
-  <div class="main">
-    <!-- APP BAR -->
-    <div class="appbar">
-      <span class="appbar-title" id="page-title">Dashboard</span>
-      <div class="search-bar">
-        <span class="material-symbols-rounded search-icon">search</span>
-        <input type="text" placeholder="Search in Material You…"/>
-        <span class="material-symbols-rounded search-icon" style="font-size:18px!important;cursor:pointer;">tune</span>
-      </div>
-      <div class="theme-switcher">
-        <button class="theme-pill active" onclick="setTheme('light',this)">Light</button>
-        <button class="theme-pill" onclick="setTheme('dark',this)">Dark</button>
-        <button class="theme-pill" onclick="setTheme('oled',this)">OLED</button>
-      </div>
-      <button class="icon-btn"><span class="material-symbols-rounded">notifications</span></button>
-      <button class="icon-btn"><span class="material-symbols-rounded">help</span></button>
-      <div class="avatar">A</div>
-    </div>
+  <script>
+    // SCROLL ANIMATION
+    const sections = document.querySelectorAll(".section");
 
-    <!-- CONTENT -->
-    <div class="content" id="content">
+    window.addEventListener("scroll", () => {
+      const trigger = window.innerHeight * 0.85;
 
-      <!-- STAT CARDS -->
-      <p class="section-title">Overview</p>
-      <div class="grid-3" id="stats">
-        <div class="card animate-in d1">
-          <div class="card-icon icon-blue"><span class="material-symbols-rounded" style="font-size:22px!important">people</span></div>
-          <div class="card-title">Total Users</div>
-          <div class="card-value">84,291</div>
-          <div class="card-sub"><span class="material-symbols-rounded trend-up" style="font-size:14px!important">arrow_upward</span><span class="trend-up">+12.4%</span> vs last month</div>
-        </div>
-        <div class="card animate-in d2">
-          <div class="card-icon icon-green"><span class="material-symbols-rounded" style="font-size:22px!important">payments</span></div>
-          <div class="card-title">Revenue</div>
-          <div class="card-value">$24,580</div>
-          <div class="card-sub"><span class="material-symbols-rounded trend-up" style="font-size:14px!important">arrow_upward</span><span class="trend-up">+8.1%</span> vs last month</div>
-        </div>
-        <div class="card animate-in d3">
-          <div class="card-icon icon-red"><span class="material-symbols-rounded" style="font-size:22px!important">bug_report</span></div>
-          <div class="card-title">Open Issues</div>
-          <div class="card-value">47</div>
-          <div class="card-sub"><span class="material-symbols-rounded trend-down" style="font-size:14px!important">arrow_downward</span><span class="trend-down">−3</span> since yesterday</div>
-        </div>
-      </div>
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
 
-      <!-- CHIPS -->
-      <p class="section-title">Filter Chips</p>
-      <div class="chips animate-in d2">
-        <button class="chip selected" onclick="toggleChip(this)"><span class="material-symbols-rounded">check</span>All</button>
-        <button class="chip" onclick="toggleChip(this)">Design</button>
-        <button class="chip" onclick="toggleChip(this)">Engineering</button>
-        <button class="chip" onclick="toggleChip(this)">Marketing</button>
-        <button class="chip" onclick="toggleChip(this)"><span class="material-symbols-rounded">star</span>Featured</button>
-        <button class="chip" onclick="toggleChip(this)">Archived</button>
-      </div>
+        if (top < trigger) {
+          section.classList.add("visible");
+        }
+      });
+    });
+  </script>
 
-      <!-- BUTTONS -->
-      <p class="section-title">Buttons</p>
-      <div class="btn-row animate-in d3">
-        <button class="btn btn-filled" onclick="showSnack('Action completed')">
-          <span class="material-symbols-rounded">add</span>Filled
-        </button>
-        <button class="btn btn-tonal" onclick="showSnack('Tonal action')">
-          <span class="material-symbols-rounded">edit</span>Tonal
-        </button>
-        <button class="btn btn-outlined" onclick="showSnack('Outlined action')">Outlined</button>
-        <button class="btn btn-text" onclick="showSnack('Text action')">Text</button>
-        <button class="btn btn-error" onclick="showSnack('Deleted!')">
-          <span class="material-symbols-rounded">delete</span>Danger
-        </button>
-        <button class="fab" onclick="showSnack('FAB tapped!')">
-          <span class="material-symbols-rounded">add</span>
-        </button>
-        <button class="fab-ext" onclick="showSnack('Extended FAB!')">
-          <span class="material-symbols-rounded">edit</span>
-          Compose
-        </button>
-      </div>
-
-      <!-- LIST + PROGRESS side by side -->
-      <div class="grid-2 animate-in d4">
-        <!-- List Card -->
-        <div>
-          <p class="section-title">Recent Activity</p>
-          <div class="list-card">
-            <div class="list-item">
-              <div class="list-avatar" style="background:#1A73E8">P</div>
-              <div class="list-content">
-                <div class="list-primary">Priya updated the design system</div>
-                <div class="list-secondary">Figma · Components library</div>
-              </div>
-              <div class="list-meta">2m ago</div>
-            </div>
-            <div class="list-item">
-              <div class="list-avatar" style="background:#34A853">K</div>
-              <div class="list-content">
-                <div class="list-primary">Karthik merged pull request #241</div>
-                <div class="list-secondary">GitHub · main ← feat/auth</div>
-              </div>
-              <div class="list-meta">18m ago</div>
-            </div>
-            <div class="list-item">
-              <div class="list-badge" style="position:relative;display:inline-flex;">
-                <div class="list-avatar" style="background:#F9AB00">S</div>
-                <span class="badge-dot"></span>
-              </div>
-              <div class="list-content">
-                <div class="list-primary">Sara left a comment on issue #88</div>
-                <div class="list-secondary">Jira · Sprint 4</div>
-              </div>
-              <div class="list-meta">1h ago</div>
-            </div>
-            <div class="list-item">
-              <div class="list-avatar" style="background:#A142F4">R</div>
-              <div class="list-content">
-                <div class="list-primary">Ravi deployed to production</div>
-                <div class="list-secondary">Cloud Run · v2.3.1</div>
-              </div>
-              <div class="list-meta">3h ago</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Progress Card -->
-        <div>
-          <p class="section-title">Sprint Progress</p>
-          <div class="card animate-in d5">
-            <div class="progress-label">Design Tasks</div>
-            <div class="progress-bar"><div class="progress-fill green" style="width:78%"></div></div>
-
-            <div class="progress-label">Frontend</div>
-            <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
-
-            <div class="progress-label">Backend APIs</div>
-            <div class="progress-bar"><div class="progress-fill yellow" style="width:40%"></div></div>
-
-            <div class="progress-label">QA / Testing</div>
-            <div class="progress-bar"><div class="progress-fill red" style="width:22%"></div></div>
-
-            <hr class="divider" style="margin:16px 0"/>
-
-            <p class="section-title" style="font-size:14px;margin-bottom:12px;">Toggles</p>
-            <div class="switch-row">
-              <span class="switch-label">Dark mode notifications</span>
-              <label class="switch">
-                <input type="checkbox" checked onchange="void(0)"/>
-                <div class="switch-track"></div>
-                <div class="switch-thumb"></div>
-              </label>
-            </div>
-            <div class="switch-row">
-              <span class="switch-label">Compact view</span>
-              <label class="switch">
-                <input type="checkbox" onchange="void(0)"/>
-                <div class="switch-track"></div>
-                <div class="switch-thumb"></div>
-              </label>
-            </div>
-            <div class="switch-row">
-              <span class="switch-label">Auto-refresh data</span>
-              <label class="switch">
-                <input type="checkbox" checked onchange="void(0)"/>
-                <div class="switch-track"></div>
-                <div class="switch-thumb"></div>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- COLOR PALETTE REFERENCE -->
-      <p class="section-title animate-in d6">Color Tokens</p>
-      <div class="grid-3 animate-in d6" style="margin-bottom:48px;">
-        <div class="card" style="display:flex;flex-direction:column;gap:10px;">
-          <div style="height:52px;border-radius:10px;background:var(--primary);"></div>
-          <div style="font-size:13px;font-weight:500;">Primary</div>
-          <div style="font-size:11px;color:var(--text-secondary);">Light #1A73E8 · Dark #A8C7FA</div>
-        </div>
-        <div class="card" style="display:flex;flex-direction:column;gap:10px;">
-          <div style="height:52px;border-radius:10px;background:var(--primary-container);"></div>
-          <div style="font-size:13px;font-weight:500;">Primary Container</div>
-          <div style="font-size:11px;color:var(--text-secondary);">Light #D3E3FD · Dark #0842A0</div>
-        </div>
-        <div class="card" style="display:flex;flex-direction:column;gap:10px;">
-          <div style="height:52px;border-radius:10px;background:var(--secondary);"></div>
-          <div style="font-size:13px;font-weight:500;">Secondary / Error</div>
-          <div style="font-size:11px;color:var(--text-secondary);">Light #D93025 · Dark #F28B82</div>
-        </div>
-        <div class="card" style="display:flex;flex-direction:column;gap:10px;">
-          <div style="height:52px;border-radius:10px;background:var(--bg-surface1);border:1px solid var(--border);"></div>
-          <div style="font-size:13px;font-weight:500;">Surface 1</div>
-          <div style="font-size:11px;color:var(--text-secondary);">Elevated container</div>
-        </div>
-        <div class="card" style="display:flex;flex-direction:column;gap:10px;">
-          <div style="height:52px;border-radius:10px;background:var(--text);"></div>
-          <div style="font-size:13px;font-weight:500;">On Surface</div>
-          <div style="font-size:11px;color:var(--text-secondary);">#202124 · #E8EAED</div>
-        </div>
-        <div class="card" style="display:flex;flex-direction:column;gap:10px;">
-          <div style="height:52px;border-radius:10px;background:var(--text-secondary);"></div>
-          <div style="font-size:13px;font-weight:500;">On Surface Variant</div>
-          <div style="font-size:11px;color:var(--text-secondary);">#5F6368 · #9AA0A6</div>
-        </div>
-      </div>
-
-    </div><!-- /content -->
-  </div><!-- /main -->
-</div><!-- /shell -->
-
-<!-- SNACKBAR -->
-<div class="snackbar" id="snackbar">
-  <span id="snack-msg">Done</span>
-  <span class="snackbar-action" onclick="hideSnack()">Undo</span>
-</div>
-
-<script>
-// Theme switcher
-function setTheme(t, btn) {
-  document.body.setAttribute('data-theme', t);
-  document.querySelectorAll('.theme-pill').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-// Nav page label
-function setPage(el, name) {
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('page-title').textContent = name;
-}
-
-// Chip toggle
-function toggleChip(el) {
-  el.classList.toggle('selected');
-  // manage check icon
-  const hasCheck = el.querySelector('.material-symbols-rounded');
-  if (el.classList.contains('selected') && !hasCheck) {
-    const ic = document.createElement('span');
-    ic.className = 'material-symbols-rounded';
-    ic.textContent = 'check';
-    el.prepend(ic);
-  } else if (!el.classList.contains('selected') && hasCheck && hasCheck.textContent === 'check') {
-    hasCheck.remove();
-  }
-}
-
-// Snackbar
-let snackTimer;
-function showSnack(msg) {
-  const sb = document.getElementById('snackbar');
-  document.getElementById('snack-msg').textContent = msg;
-  sb.classList.add('show');
-  clearTimeout(snackTimer);
-  snackTimer = setTimeout(hideSnack, 2800);
-}
-function hideSnack() {
-  document.getElementById('snackbar').classList.remove('show');
-}
-
-// Ripple on buttons
-document.querySelectorAll('.btn, .fab, .fab-ext, .icon-btn').forEach(btn => {
-  btn.addEventListener('click', e => {
-    const r = document.createElement('span');
-    const rect = btn.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    r.className = 'ripple-effect';
-    r.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px`;
-    btn.appendChild(r);
-    setTimeout(() => r.remove(), 500);
-  });
-});
-
-// Animate progress bars on load
-window.addEventListener('load', () => {
-  document.querySelectorAll('.progress-fill').forEach(b => {
-    const w = b.style.width; b.style.width='0';
-    setTimeout(() => { b.style.width = w; }, 300);
-  });
-});
-</script>
 </body>
 </html>
