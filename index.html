@@ -1,195 +1,715 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hollow Launcher</title>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
+    :root {
+      --bg: #080808;
+      --surface: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.2);
+      --text: #f0f0f0;
+      --muted: rgba(255,255,255,0.45);
+      --accent: #c8ff00;
+      --accent-glow: rgba(200,255,0,0.18);
+      --radius: 16px;
     }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      background: #0b0b0b;
-      color: #fff;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 20px;
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content:'';
+      position:fixed; inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9999;
     }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
+    /* ─── ORBS ─── */
+    .orb {
+      position:fixed;
+      border-radius:50%;
+      filter: blur(120px);
+      pointer-events:none;
+      z-index:0;
+      animation: orb-drift 18s ease-in-out infinite alternate;
+    }
+    .orb-1 { width:600px; height:600px; background: rgba(200,255,0,0.06); top:-200px; left:-150px; animation-duration:20s; }
+    .orb-2 { width:500px; height:500px; background: rgba(100,180,255,0.05); bottom:-100px; right:-150px; animation-duration:16s; animation-delay:-8s; }
+    .orb-3 { width:350px; height:350px; background: rgba(255,140,0,0.04); top:50%; left:45%; animation-duration:24s; animation-delay:-4s; }
+
+    @keyframes orb-drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(40px, 60px) scale(1.1); }
     }
 
-    nav a {
-      color: #aaa;
-      text-decoration: none;
-      margin-left: 20px;
-      font-size: 14px;
+    /* ─── NAVBAR ─── */
+    nav {
+      position: sticky; top:0; z-index:100;
+      display:flex; justify-content:space-between; align-items:center;
+      padding: 18px 48px;
+      background: rgba(8,8,8,0.6);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      animation: nav-in 0.6s ease both;
+    }
+    @keyframes nav-in { from{ opacity:0; transform:translateY(-14px);} to{ opacity:1; transform:none;} }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      display:flex; align-items:center; gap:10px;
+    }
+    .logo-dot {
+      width:8px; height:8px; border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{transform:scale(1); opacity:1;} 50%{transform:scale(1.4); opacity:0.7;} }
+
+    .nav-links { display:flex; gap:32px; align-items:center; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration:none;
+      font-size:14px;
+      font-weight:500;
+      letter-spacing:0.2px;
+      transition: color 0.2s;
+      position:relative;
+    }
+    .nav-links a::after {
+      content:'';
+      position:absolute; bottom:-3px; left:0; right:100%; height:1px;
+      background: var(--accent);
+      transition: right 0.25s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { right:0; }
+
+    .nav-cta {
+      padding: 9px 20px;
+      background: var(--accent);
+      color: #0a0a0a !important;
+      border-radius: 8px;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      transition: transform 0.15s, box-shadow 0.2s !important;
+    }
+    .nav-cta::after { display:none !important; }
+    .nav-cta:hover {
+      transform: translateY(-1px) !important;
+      box-shadow: 0 6px 24px rgba(200,255,0,0.3) !important;
+      color: #0a0a0a !important;
     }
 
-    nav a:hover {
-      color: #fff;
-    }
-
+    /* ─── HERO ─── */
     .hero {
-      text-align: center;
-      margin-top: 80px;
+      position:relative; z-index:1;
+      min-height:92vh;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center;
+      padding: 60px 24px;
+      overflow:hidden;
     }
+
+    .hero-tag {
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius:99px;
+      font-size:12px;
+      color: var(--muted);
+      letter-spacing:0.5px;
+      text-transform:uppercase;
+      backdrop-filter:blur(10px);
+      margin-bottom:28px;
+      animation: fade-up 0.7s 0.1s ease both;
+    }
+    .hero-tag span { color: var(--accent); font-weight:700; }
 
     .hero h1 {
-      font-size: 64px;
-      margin-bottom: 10px;
+      font-family:'Syne', sans-serif;
+      font-size: clamp(52px, 9vw, 96px);
+      font-weight:800;
+      line-height:1.02;
+      letter-spacing:-2px;
+      animation: fade-up 0.7s 0.2s ease both;
+    }
+    .hero h1 em {
+      font-style:normal;
+      background: linear-gradient(135deg, var(--accent) 0%, #aaff44 60%, #fff 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
     }
 
-    .hero p {
-      opacity: 0.7;
-      font-size: 18px;
+    .hero-sub {
+      margin-top:20px;
+      color: var(--muted);
+      font-size:18px;
+      max-width:520px;
+      animation: fade-up 0.7s 0.3s ease both;
     }
 
-    .btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 14px 32px;
-      background: #fff;
-      color: #000;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.2s;
+    .hero-actions {
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
+      margin-top:40px;
+      animation: fade-up 0.7s 0.4s ease both;
     }
 
-    .btn:hover {
-      background: #ddd;
+    .btn-primary {
+      display:inline-flex; align-items:center; gap:9px;
+      padding: 15px 30px;
+      background: var(--accent);
+      color: #080808;
+      border-radius:12px;
+      font-weight:700;
+      font-size:15px;
+      text-decoration:none;
+      transition: transform 0.15s, box-shadow 0.2s;
+      letter-spacing:-0.2px;
+    }
+    .btn-primary:hover {
+      transform:translateY(-2px);
+      box-shadow: 0 12px 40px rgba(200,255,0,0.35);
+    }
+    .btn-primary svg { flex-shrink:0; }
+
+    .btn-ghost {
+      display:inline-flex; align-items:center; gap:9px;
+      padding: 15px 28px;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius:12px;
+      font-weight:500;
+      font-size:15px;
+      text-decoration:none;
+      backdrop-filter:blur(10px);
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--border-hover);
+      background: rgba(255,255,255,0.07);
+      transform:translateY(-2px);
     }
 
-    .section {
-      margin-top: 100px;
+    .hero-stats {
+      display:flex; gap:40px; flex-wrap:wrap; justify-content:center;
+      margin-top:60px;
+      animation: fade-up 0.7s 0.55s ease both;
+    }
+    .stat {
+      text-align:center;
+    }
+    .stat-num {
+      font-family:'Syne', sans-serif;
+      font-size:28px; font-weight:800;
+      color: var(--accent);
+    }
+    .stat-label { font-size:12px; color:var(--muted); letter-spacing:0.5px; text-transform:uppercase; margin-top:2px; }
+
+    /* ─── SCROLL INDICATOR ─── */
+    .scroll-hint {
+      position:absolute; bottom:32px;
+      display:flex; flex-direction:column; align-items:center; gap:8px;
+      color:var(--muted); font-size:11px; letter-spacing:1px; text-transform:uppercase;
+      animation: fade-up 1s 1s ease both;
+    }
+    .scroll-line {
+      width:1px; height:48px;
+      background: linear-gradient(to bottom, transparent, var(--accent));
+      animation: line-grow 1.4s 1.2s ease both;
+    }
+    @keyframes line-grow { from{height:0; opacity:0;} to{height:48px; opacity:1;} }
+
+    @keyframes fade-up {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:none; }
     }
 
-    h2 {
-      margin-bottom: 20px;
-      font-size: 32px;
+    /* ─── SECTIONS ─── */
+    .section { position:relative; z-index:1; padding: 100px 48px; max-width:1200px; margin:auto; }
+
+    .section-label {
+      font-size:11px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--accent); font-weight:700; margin-bottom:14px;
+    }
+    .section-title {
+      font-family:'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight:800;
+      letter-spacing:-1px;
+      line-height:1.1;
+      margin-bottom:16px;
+    }
+    .section-desc { color:var(--muted); font-size:16px; max-width:480px; line-height:1.7; }
+
+    /* ─── FEATURES GRID ─── */
+    .features-header { margin-bottom:56px; }
+
+    .features-grid {
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
     }
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+    .feat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: border-color 0.25s, transform 0.25s, background 0.25s;
+      cursor:default;
+      position:relative;
+      overflow:hidden;
+    }
+    .feat-card::before {
+      content:'';
+      position:absolute; inset:0;
+      background: radial-gradient(circle at 60% 0%, rgba(200,255,0,0.06) 0%, transparent 65%);
+      opacity:0;
+      transition: opacity 0.3s;
+    }
+    .feat-card:hover::before { opacity:1; }
+    .feat-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.06);
+    }
+    .feat-card.large { grid-column: span 2; }
+
+    .feat-icon {
+      width:42px; height:42px;
+      background: rgba(200,255,0,0.1);
+      border: 1px solid rgba(200,255,0,0.2);
+      border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:20px;
+      margin-bottom:18px;
+    }
+    .feat-card h3 {
+      font-family:'Syne', sans-serif;
+      font-size:17px; font-weight:700;
+      letter-spacing:-0.3px;
+      margin-bottom:8px;
+    }
+    .feat-card p { color:var(--muted); font-size:14px; line-height:1.65; }
+
+    .feat-badge {
+      display:inline-block; margin-top:12px;
+      padding:3px 10px;
+      background: rgba(200,255,0,0.1);
+      border: 1px solid rgba(200,255,0,0.2);
+      border-radius:99px;
+      color: var(--accent);
+      font-size:11px; letter-spacing:0.5px;
     }
 
-    .card {
-      background: #141414;
-      padding: 25px;
-      border-radius: 14px;
-      border: 1px solid #222;
-      transition: 0.2s;
-    }
+    /* ─── PREVIEW ─── */
+    #preview { padding-top:0; }
 
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: #444;
+    .preview-wrap {
+      position:relative;
+      border-radius:20px;
+      overflow:hidden;
+      border: 1px solid var(--border);
     }
-
-    .preview {
-      width: 100%;
-      border-radius: 14px;
-      border: 1px solid #222;
+    .preview-wrap::after {
+      content:'';
+      position:absolute; inset:0;
+      background: linear-gradient(to bottom, transparent 70%, rgba(8,8,8,0.8) 100%);
+      pointer-events:none;
     }
-
-    .download-box {
-      background: #141414;
-      padding: 30px;
-      border-radius: 14px;
-      border: 1px solid #222;
-      text-align: center;
+    .preview-bar {
+      background: rgba(18,18,18,0.9);
+      backdrop-filter:blur(12px);
+      padding:12px 18px;
+      display:flex; align-items:center; gap:8px;
+      border-bottom: 1px solid var(--border);
     }
+    .dot { width:12px; height:12px; border-radius:50%; }
+    .dot-r { background:#ff5f57; }
+    .dot-y { background:#febc2e; }
+    .dot-g { background:#28c840; }
+    .preview-title { margin-left:8px; font-size:13px; color:var(--muted); }
 
+    .preview-img {
+      width:100%; display:block;
+      background: linear-gradient(145deg, #111 0%, #0e1a0e 40%, #0d0d0d 100%);
+      min-height:460px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .preview-placeholder {
+      display:flex; flex-direction:column; align-items:center; gap:16px;
+      color:var(--muted);
+    }
+    .preview-placeholder svg { opacity:0.3; }
+    .preview-placeholder p { font-size:13px; opacity:0.6; }
+
+    /* If you add a real screenshot, replace the placeholder above with:
+       <img src="preview.png" alt="Hollow Launcher" style="width:100%;display:block;" /> */
+
+    /* ─── DOWNLOAD ─── */
+    .download-grid {
+      display:grid; grid-template-columns: 1fr 1fr; gap:16px;
+      margin-top:40px;
+    }
+    .dl-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      backdrop-filter:blur(16px);
+      transition: border-color 0.2s, transform 0.2s;
+      display:flex; flex-direction:column; gap:16px;
+    }
+    .dl-card:hover { border-color:var(--border-hover); transform:translateY(-3px); }
+    .dl-card.featured {
+      border-color: rgba(200,255,0,0.3);
+      background: rgba(200,255,0,0.04);
+    }
+    .dl-card.featured:hover { border-color:rgba(200,255,0,0.5); }
+
+    .dl-os { display:flex; align-items:center; gap:12px; }
+    .dl-os-icon { font-size:26px; }
+    .dl-os-name { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; }
+    .dl-os-version { font-size:12px; color:var(--muted); }
+    .dl-info { font-size:13px; color:var(--muted); line-height:1.6; }
+    .dl-action { display:flex; align-items:center; gap:10px; justify-content:space-between; margin-top:4px; }
+    .dl-size { font-size:12px; color:var(--muted); }
+
+    /* ─── FOOTER ─── */
     footer {
-      margin-top: 120px;
-      padding: 30px 0;
-      text-align: center;
-      opacity: 0.5;
-      border-top: 1px solid #222;
+      position:relative; z-index:1;
+      border-top:1px solid var(--border);
+      padding: 40px 48px;
+      display:flex; justify-content:space-between; align-items:center;
+      flex-wrap:wrap; gap:20px;
     }
+    .footer-logo {
+      font-family:'Syne',sans-serif; font-weight:800; font-size:16px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .footer-links { display:flex; gap:28px; }
+    .footer-links a { color:var(--muted); text-decoration:none; font-size:13px; transition:color 0.2s; }
+    .footer-links a:hover { color:var(--text); }
+    .footer-copy { color:var(--muted); font-size:12px; }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity:0;
+      transform:translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity:1;
+      transform:none;
+    }
+    .reveal-delay-1 { transition-delay:0.1s; }
+    .reveal-delay-2 { transition-delay:0.2s; }
+    .reveal-delay-3 { transition-delay:0.3s; }
+    .reveal-delay-4 { transition-delay:0.4s; }
+    .reveal-delay-5 { transition-delay:0.5s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width:900px) {
+      nav { padding:16px 24px; }
+      .section { padding:70px 24px; }
+      .features-grid { grid-template-columns:1fr 1fr; }
+      .feat-card.large { grid-column:span 1; }
+      .download-grid { grid-template-columns:1fr; }
+      footer { padding:30px 24px; flex-direction:column; align-items:flex-start; }
+    }
+    @media (max-width:600px) {
+      .features-grid { grid-template-columns:1fr; }
+      .hero-stats { gap:28px; }
+      .nav-links .nav-cta { display:none; }
+    }
+
+    /* ─── ACTIVE NAV LINK ─── */
+    .nav-links a.active { color:var(--text); }
+    .nav-links a.active::after { right:0; }
   </style>
-
 </head>
-
 <body>
 
-  <div class="container">
+<!-- AMBIENT ORBS -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
 
-```
-<!-- HEADER -->
-<header>
-  <h3>Hollow Launcher</h3>
-  <nav>
+<!-- ─── NAVBAR ─── -->
+<nav id="navbar">
+  <div class="logo">
+    <div class="logo-dot"></div>
+    Hollow Launcher
+  </div>
+  <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#preview">Preview</a>
     <a href="#download">Download</a>
-  </nav>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-  <h1>Hollow Launcher</h1>
-  <p>Minimal. Fast. Minecraft Launcher for Vanilla & Fabric.</p>
-
-  <a href="https://github.com/yourusername/hollow-launcher/releases/latest" class="btn">
-    Download Now
-  </a>
-</section>
-
-<!-- FEATURES -->
-<section id="features" class="section">
-  <h2>Features</h2>
-  <div class="features">
-    <div class="card">⚡ Ultra fast performance</div>
-    <div class="card">🧩 Full Fabric support</div>
-    <div class="card">🎮 Vanilla ready</div>
-    <div class="card">🖥 Clean UI (no blur, no glass)</div>
-    <div class="card">📦 Instance management (planned)</div>
-    <div class="card">🔒 Safe & simple downloads</div>
-  </div>
-</section>
-
-<!-- PREVIEW -->
-<section id="preview" class="section">
-  <h2>Preview</h2>
-  <img src="https://via.placeholder.com/1000x500" class="preview" alt="Launcher Preview">
-</section>
-
-<!-- DOWNLOAD -->
-<section id="download" class="section">
-  <h2>Download</h2>
-  <div class="download-box">
-    <p>Get the latest version of Hollow Launcher</p>
-    <a href="https://github.com/yourusername/hollow-launcher/releases/latest" class="btn">
-      Download for Windows
+    <a href="https://github.com/yourusername/hollow-launcher" target="_blank" class="nav-cta">
+      ↓ Download
     </a>
   </div>
-</section>
+</nav>
 
-<!-- FOOTER -->
-<footer>
-  © 2026 Hollow Launcher • Built by Ashmeet
-</footer>
-```
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-tag">✦ <span>Now in beta</span> &nbsp;— v0.1.0 released</div>
+  <h1>The <em>cleanest</em><br/>Minecraft Launcher</h1>
+  <p class="hero-sub">Minimal, fast, and built for real players. Vanilla & Fabric. No bloat, no nonsense.</p>
 
+  <div class="hero-actions">
+    <a href="https://github.com/yourusername/hollow-launcher/releases/latest" class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download for Windows
+    </a>
+    <a href="https://github.com/yourusername/hollow-launcher" target="_blank" class="btn-ghost">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      View on GitHub
+    </a>
   </div>
 
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">~12MB</div>
+      <div class="stat-label">Install Size</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">&lt;1s</div>
+      <div class="stat-label">Cold Launch</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">Free</div>
+      <div class="stat-label">Always</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">Open</div>
+      <div class="stat-label">Source</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ─── FEATURES ─── -->
+<section class="section" id="features">
+  <div class="features-header reveal">
+    <div class="section-label">What's inside</div>
+    <h2 class="section-title">Built different.</h2>
+    <p class="section-desc">Every decision was made to keep things fast, clean, and out of your way.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feat-card large reveal reveal-delay-1">
+      <div class="feat-icon">⚡</div>
+      <h3>Ultra-Fast Performance</h3>
+      <p>Hollow launches in under a second on cold start. No Java runtime scanning, no asset re-downloads, no waiting. It just works.</p>
+    </div>
+    <div class="feat-card reveal reveal-delay-2">
+      <div class="feat-icon">🧩</div>
+      <h3>Full Fabric Support</h3>
+      <p>Native Fabric loader detection. Load your modpack in seconds.</p>
+    </div>
+    <div class="feat-card reveal reveal-delay-1">
+      <div class="feat-icon">🎮</div>
+      <h3>Vanilla Ready</h3>
+      <p>Official Minecraft auth. Every release and snapshot, always up to date.</p>
+    </div>
+    <div class="feat-card reveal reveal-delay-2">
+      <div class="feat-icon">🖥</div>
+      <h3>Clean UI, No Clutter</h3>
+      <p>Zero ads, zero upsells. Just a launcher that does its job elegantly.</p>
+    </div>
+    <div class="feat-card reveal reveal-delay-3">
+      <div class="feat-icon">📦</div>
+      <h3>Instance Management</h3>
+      <p>Separate Fabric, Vanilla and snapshot profiles with individual JVM args.</p>
+      <span class="feat-badge">Coming soon</span>
+    </div>
+    <div class="feat-card reveal reveal-delay-4">
+      <div class="feat-icon">🔒</div>
+      <h3>Safe Downloads</h3>
+      <p>SHA-256 verified. Every file checked before it touches your disk.</p>
+    </div>
+    <div class="feat-card reveal reveal-delay-3">
+      <div class="feat-icon">🌐</div>
+      <h3>Open Source</h3>
+      <p>Fully auditable code. No telemetry, no tracking. Fork it, improve it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PREVIEW ─── -->
+<section class="section" id="preview" style="padding-top:0;">
+  <div class="features-header reveal">
+    <div class="section-label">Screenshot</div>
+    <h2 class="section-title">See it in action.</h2>
+    <p class="section-desc">Clean, dark, distraction-free. Exactly what a launcher should look like.</p>
+  </div>
+
+  <div class="preview-wrap reveal reveal-delay-1">
+    <div class="preview-bar">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+      <span class="preview-title">Hollow Launcher — v0.1.0</span>
+    </div>
+    <!-- 🖼 REPLACE THIS BLOCK WITH YOUR SCREENSHOT:
+         <img src="preview.png" alt="Hollow Launcher Screenshot" style="width:100%;display:block;"> -->
+    <div class="preview-img">
+      <div class="preview-placeholder">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+        </svg>
+        <p>Add your screenshot here → replace with &lt;img src="preview.png"&gt;</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DOWNLOAD ─── -->
+<section class="section" id="download">
+  <div class="features-header reveal">
+    <div class="section-label">Get started</div>
+    <h2 class="section-title">Download Hollow.</h2>
+    <p class="section-desc">Free. Always. No account needed. Just download and launch.</p>
+  </div>
+
+  <div class="download-grid">
+    <div class="dl-card featured reveal reveal-delay-1">
+      <div class="dl-os">
+        <div class="dl-os-icon">🪟</div>
+        <div>
+          <div class="dl-os-name">Windows</div>
+          <div class="dl-os-version">Windows 10 / 11 · 64-bit</div>
+        </div>
+      </div>
+      <div class="dl-info">The primary build. Installer included. Tested on every major Windows release.</div>
+      <div class="dl-action">
+        <span class="dl-size">≈ 12 MB · .exe installer</span>
+        <a href="https://github.com/yourusername/hollow-launcher/releases/latest" class="btn-primary" style="padding:10px 20px; font-size:13px;">
+          Download ↓
+        </a>
+      </div>
+    </div>
+
+    <div class="dl-card reveal reveal-delay-2">
+      <div class="dl-os">
+        <div class="dl-os-icon">🍎</div>
+        <div>
+          <div class="dl-os-name">macOS</div>
+          <div class="dl-os-version">macOS 12 Monterey+</div>
+        </div>
+      </div>
+      <div class="dl-info">Universal build for Intel and Apple Silicon. Currently in testing.</div>
+      <div class="dl-action">
+        <span class="dl-size">Coming soon</span>
+        <span class="feat-badge">Planned</span>
+      </div>
+    </div>
+
+    <div class="dl-card reveal reveal-delay-3" style="grid-column:1/-1;">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+        <div>
+          <div class="dl-os-name" style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;">Want the latest dev build?</div>
+          <div class="dl-info" style="margin-top:6px;">Clone the repo and build from source. Contributions welcome.</div>
+        </div>
+        <a href="https://github.com/yourusername/hollow-launcher" target="_blank" class="btn-ghost" style="white-space:nowrap;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub Repository →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-dot" style="animation:none;"></div>
+    Hollow Launcher
+  </div>
+  <div class="footer-links">
+    <a href="https://github.com/yourusername/hollow-launcher" target="_blank">GitHub</a>
+    <a href="https://github.com/yourusername/hollow-launcher/issues" target="_blank">Bug Report</a>
+    <a href="https://github.com/yourusername/hollow-launcher/blob/main/LICENSE" target="_blank">License</a>
+  </div>
+  <div class="footer-copy">© 2026 Hollow Launcher · Built by Ashmeet</div>
+</footer>
+
+<script>
+  // ─── SCROLL REVEAL ───
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ─── ACTIVE NAV LINK ───
+  const sections = document.querySelectorAll('section[id], .hero');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
+
+  // ─── NAVBAR SHRINK ON SCROLL ───
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.padding =
+      window.scrollY > 40 ? '12px 48px' : '18px 48px';
+  });
+
+  // ─── CARD SPOTLIGHT EFFECT ───
+  document.querySelectorAll('.feat-card, .dl-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+      const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+      card.style.setProperty('--mx', x + '%');
+      card.style.setProperty('--my', y + '%');
+    });
+  });
+</script>
 </body>
 </html>
-
