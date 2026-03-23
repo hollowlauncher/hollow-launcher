@@ -5,22 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hollow Launcher</title>
 
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", sans-serif;
     }
 
     html {
-      /* Adds a nice gliding effect when clicking nav links */
-      scroll-behavior: smooth; 
+      scroll-behavior: smooth;
     }
 
     body {
-      background: #0b0b0b;
       color: #fff;
+      background: #000;
+    }
+
+    /* Background image */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1605902711622-cfb43c4437d1') center/cover no-repeat;
+      opacity: 0.15;
+      z-index: -1;
     }
 
     .container {
@@ -36,14 +48,20 @@
       padding: 20px 0;
       position: sticky;
       top: 0;
-      background: rgba(11, 11, 11, 0.9);
-      backdrop-filter: blur(5px);
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
       z-index: 100;
     }
 
-    header h3 {
-      font-size: 24px;
-      font-weight: 600;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 32px;
+      height: 32px;
     }
 
     nav a {
@@ -51,7 +69,7 @@
       text-decoration: none;
       margin-left: 20px;
       font-size: 15px;
-      transition: color 0.2s;
+      transition: 0.2s;
     }
 
     nav a:hover {
@@ -61,7 +79,7 @@
     .hero {
       text-align: center;
       margin-top: 100px;
-      margin-bottom: 60px;
+      animation: fadeUp 1s ease;
     }
 
     .hero h1 {
@@ -86,23 +104,24 @@
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      transition: all 0.2s ease;
+      transition: 0.2s;
     }
 
     .btn:hover {
-      background: #ddd;
       transform: scale(1.05);
+      background: #ddd;
     }
 
     .section {
       margin-top: 100px;
-      scroll-margin-top: 100px; /* Prevents the sticky header from hiding section titles */
+      scroll-margin-top: 100px;
+      animation: fadeUp 1s ease;
     }
 
     h2 {
+      text-align: center;
       margin-bottom: 30px;
       font-size: 32px;
-      text-align: center;
     }
 
     .features {
@@ -112,26 +131,26 @@
     }
 
     .card {
-      background: #141414;
-      padding: 30px;
+      background: #111;
+      padding: 25px;
       border-radius: 12px;
       border: 1px solid #222;
-      font-size: 18px;
       display: flex;
       align-items: center;
       gap: 15px;
-      transition: all 0.3s ease;
+      font-size: 18px;
+      transition: 0.3s;
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
       border-color: #555;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
     }
 
-    .preview-container {
-      display: flex;
-      justify-content: center;
+    .material-symbols-outlined {
+      font-size: 28px;
+      color: #fff;
     }
 
     .preview {
@@ -139,21 +158,20 @@
       max-width: 900px;
       border-radius: 12px;
       border: 1px solid #333;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+    }
+
+    .preview-container {
+      display: flex;
+      justify-content: center;
     }
 
     .download-box {
-      background: #141414;
+      background: #111;
       padding: 50px 30px;
       border-radius: 12px;
       border: 1px solid #222;
       text-align: center;
-    }
-
-    .download-box p {
-      font-size: 18px;
-      color: #aaa;
-      margin-bottom: 10px;
     }
 
     footer {
@@ -161,67 +179,107 @@
       padding: 30px 0;
       text-align: center;
       color: #666;
-      font-size: 14px;
       border-top: 1px solid #222;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <header>
+  <header>
+    <div class="logo">
+      <!-- Replace with your real logo -->
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png">
       <h3>Hollow Launcher</h3>
-      <nav>
-        <a href="#features">Features</a>
-        <a href="#preview">Preview</a>
-        <a href="#download">Download</a>
-      </nav>
-    </header>
+    </div>
 
-    <section class="hero">
-      <h1>Hollow Launcher</h1>
-      <p>Minimal. Fast. Minecraft Launcher for Vanilla & Fabric.</p>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#preview">Preview</a>
+      <a href="#download">Download</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Hollow Launcher</h1>
+    <p>Minimal. Fast. Minecraft Launcher for Vanilla & Fabric.</p>
+    <a href="https://github.com/71cb99d1-cd04-4cff-a187-49017af9c7a0" class="btn" target="_blank">
+      Download Now
+    </a>
+  </section>
+
+  <section id="features" class="section">
+    <h2>Features</h2>
+
+    <div class="features">
+      <div class="card">
+        <span class="material-symbols-outlined">bolt</span>
+        Ultra fast performance
+      </div>
+
+      <div class="card">
+        <span class="material-symbols-outlined">extension</span>
+        Full Fabric support
+      </div>
+
+      <div class="card">
+        <span class="material-symbols-outlined">sports_esports</span>
+        Vanilla ready
+      </div>
+
+      <div class="card">
+        <span class="material-symbols-outlined">desktop_windows</span>
+        Clean UI (no blur, no glass)
+      </div>
+
+      <div class="card">
+        <span class="material-symbols-outlined">inventory_2</span>
+        Instance management (planned)
+      </div>
+
+      <div class="card">
+        <span class="material-symbols-outlined">security</span>
+        Safe & simple downloads
+      </div>
+    </div>
+  </section>
+
+  <section id="preview" class="section">
+    <h2>Launcher Preview</h2>
+    <div class="preview-container">
+      <img src="https://github.com/hollowlauncher/hollow-launcher/blob/main/Screenshot%202026-03-23%20211706.png?raw=true" class="preview">
+    </div>
+  </section>
+
+  <section id="download" class="section">
+    <h2>Get Started</h2>
+
+    <div class="download-box">
+      <p>Get the latest version of Hollow Launcher</p>
       <a href="https://github.com/71cb99d1-cd04-4cff-a187-49017af9c7a0" class="btn" target="_blank">
-        Download Now
+        Download for Windows
       </a>
-    </section>
+    </div>
+  </section>
 
-    <section id="features" class="section">
-      <h2>Features</h2>
-      <div class="features">
-        <div class="card">⚡ Ultra fast performance</div>
-        <div class="card">🧩 Full Fabric support</div>
-        <div class="card">🎮 Vanilla ready</div>
-        <div class="card">🖥 Clean UI (no blur, no glass)</div>
-        <div class="card">📦 Instance management (planned)</div>
-        <div class="card">🔒 Safe & simple downloads</div>
-      </div>
-    </section>
+  <footer>
+    © 2026 Hollow Launcher • Built by Ashmeet
+  </footer>
 
-    <section id="preview" class="section">
-      <h2>Launcher Preview</h2>
-      <div class="preview-container">
-        <img src="https://github.com/hollowlauncher/hollow-launcher/blob/main/Screenshot%202026-03-23%20211706.png?raw=true" class="preview" alt="Launcher Preview">
-      </div>
-    </section>
-
-    <section id="download" class="section">
-      <h2>Get Started</h2>
-      <div class="download-box">
-        <p>Get the latest version of Hollow Launcher</p>
-        <a href="https://github.com/71cb99d1-cd04-4cff-a187-49017af9c7a0" class="btn" target="_blank">
-          Download for Windows
-        </a>
-      </div>
-    </section>
-
-    <footer>
-      © 2026 Hollow Launcher • Built by Ashmeet
-    </footer>
-
-  </div>
+</div>
 
 </body>
 </html>
