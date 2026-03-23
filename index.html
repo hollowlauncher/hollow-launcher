@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -11,13 +10,17 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    html {
+      /* Adds a nice gliding effect when clicking nav links */
+      scroll-behavior: smooth; 
     }
 
     body {
-      background: radial-gradient(circle at top, #111 0%, #0a0a0a 100%);
+      background: #0b0b0b;
       color: #fff;
-      overflow-x: hidden;
     }
 
     .container {
@@ -26,228 +29,199 @@
       padding: 40px 20px;
     }
 
-    /* NAVBAR */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 20px 0;
-      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      background: rgba(11, 11, 11, 0.9);
+      backdrop-filter: blur(5px);
+      z-index: 100;
+    }
+
+    header h3 {
+      font-size: 24px;
+      font-weight: 600;
     }
 
     nav a {
       color: #aaa;
       text-decoration: none;
       margin-left: 20px;
-      font-size: 14px;
-      transition: 0.3s;
+      font-size: 15px;
+      transition: color 0.2s;
     }
 
     nav a:hover {
       color: #fff;
     }
 
-    /* HERO */
     .hero {
       text-align: center;
       margin-top: 100px;
-      animation: fadeUp 1s ease;
+      margin-bottom: 60px;
     }
 
     .hero h1 {
       font-size: 64px;
-      letter-spacing: 1px;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #fff, #888);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero p {
       opacity: 0.7;
-      font-size: 18px;
-      margin-top: 10px;
+      font-size: 20px;
     }
 
     .btn {
       display: inline-block;
       margin-top: 30px;
       padding: 14px 32px;
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      color: #fff;
-      border-radius: 10px;
+      background: #fff;
+      color: #000;
+      border-radius: 8px;
       text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.15);
-      transition: 0.3s;
+      font-weight: bold;
+      transition: all 0.2s ease;
     }
 
     .btn:hover {
-      background: rgba(255,255,255,0.2);
-      transform: translateY(-3px);
+      background: #ddd;
+      transform: scale(1.05);
     }
 
-    /* SECTIONS */
     .section {
-      margin-top: 120px;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: 0.6s ease;
-    }
-
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
+      margin-top: 100px;
+      scroll-margin-top: 100px; /* Prevents the sticky header from hiding section titles */
     }
 
     h2 {
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       font-size: 32px;
+      text-align: center;
     }
 
-    /* FEATURES */
     .features {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
 
     .card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 25px;
-      border-radius: 14px;
-      backdrop-filter: blur(6px);
-      transition: 0.3s;
+      background: #141414;
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid #222;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-6px) scale(1.02);
-      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-5px);
+      border-color: #555;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
 
-    /* PREVIEW */
+    .preview-container {
+      display: flex;
+      justify-content: center;
+    }
+
     .preview {
       width: 100%;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(4px);
-      transition: 0.3s;
+      max-width: 900px;
+      border-radius: 12px;
+      border: 1px solid #333;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     }
 
-    .preview:hover {
-      transform: scale(1.01);
-    }
-
-    /* DOWNLOAD */
     .download-box {
-      background: rgba(255,255,255,0.05);
-      padding: 40px;
-      border-radius: 14px;
+      background: #141414;
+      padding: 50px 30px;
+      border-radius: 12px;
+      border: 1px solid #222;
       text-align: center;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* FOOTER */
+    .download-box p {
+      font-size: 18px;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
     footer {
       margin-top: 120px;
       padding: 30px 0;
       text-align: center;
-      opacity: 0.5;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #666;
+      font-size: 14px;
+      border-top: 1px solid #222;
     }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
   </style>
-
 </head>
 
 <body>
 
   <div class="container">
 
-```
-<!-- HEADER -->
-<header>
-  <h3>Hollow Launcher</h3>
-  <nav>
-    <a href="#features">Features</a>
-    <a href="#preview">Preview</a>
-    <a href="#download">Download</a>
-  </nav>
-</header>
+    <header>
+      <h3>Hollow Launcher</h3>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#preview">Preview</a>
+        <a href="#download">Download</a>
+      </nav>
+    </header>
 
-<!-- HERO -->
-<section class="hero">
-  <h1>Hollow Launcher</h1>
-  <p>Minimal. Fast. Minecraft Launcher for Vanilla & Fabric.</p>
-  <a href="https://github.com/yourusername/hollow-launcher/releases/latest" class="btn">
-    Download Now
-  </a>
-</section>
+    <section class="hero">
+      <h1>Hollow Launcher</h1>
+      <p>Minimal. Fast. Minecraft Launcher for Vanilla & Fabric.</p>
+      <a href="https://github.com/yourusername/hollow-launcher/releases/latest" class="btn" target="_blank">
+        Download Now
+      </a>
+    </section>
 
-<!-- FEATURES -->
-<section id="features" class="section">
-  <h2>Features</h2>
-  <div class="features">
-    <div class="card">⚡ Ultra fast performance</div>
-    <div class="card">🧩 Full Fabric support</div>
-    <div class="card">🎮 Vanilla ready</div>
-    <div class="card">🖥 Clean UI with subtle blur</div>
-    <div class="card">📦 Instance management (planned)</div>
-    <div class="card">🔒 Safe & simple downloads</div>
-  </div>
-</section>
+    <section id="features" class="section">
+      <h2>Features</h2>
+      <div class="features">
+        <div class="card">⚡ Ultra fast performance</div>
+        <div class="card">🧩 Full Fabric support</div>
+        <div class="card">🎮 Vanilla ready</div>
+        <div class="card">🖥 Clean UI (no blur, no glass)</div>
+        <div class="card">📦 Instance management (planned)</div>
+        <div class="card">🔒 Safe & simple downloads</div>
+      </div>
+    </section>
 
-<!-- PREVIEW -->
-<section id="preview" class="section">
-  <h2>Preview</h2>
-  <img src="https://via.placeholder.com/1000x500" class="preview">
-</section>
+    <section id="preview" class="section">
+      <h2>Launcher Preview</h2>
+      <div class="preview-container">
+        <img src="https://via.placeholder.com/1000x562/141414/ffffff?text=Hollow+Launcher+Screenshot" class="preview" alt="Launcher Preview">
+      </div>
+    </section>
 
-<!-- DOWNLOAD -->
-<section id="download" class="section">
-  <h2>Download</h2>
-  <div class="download-box">
-    <p>Get the latest version of Hollow Launcher</p>
-    <a href="https://github.com/yourusername/hollow-launcher/releases/latest" class="btn">
-      Download for Windows
-    </a>
-  </div>
-</section>
+    <section id="download" class="section">
+      <h2>Get Started</h2>
+      <div class="download-box">
+        <p>Get the latest version of Hollow Launcher</p>
+        <a href="https://github.com/yourusername/hollow-launcher/releases/latest" class="btn" target="_blank">
+          Download for Windows
+        </a>
+      </div>
+    </section>
 
-<!-- FOOTER -->
-<footer>
-  © 2026 Hollow Launcher • Built by Ashmeet
-</footer>
-```
+    <footer>
+      © 2026 Hollow Launcher • Built by Ashmeet
+    </footer>
 
   </div>
-
-  <script>
-    // SCROLL ANIMATION
-    const sections = document.querySelectorAll(".section");
-
-    window.addEventListener("scroll", () => {
-      const trigger = window.innerHeight * 0.85;
-
-      sections.forEach(section => {
-        const top = section.getBoundingClientRect().top;
-
-        if (top < trigger) {
-          section.classList.add("visible");
-        }
-      });
-    });
-  </script>
 
 </body>
 </html>
