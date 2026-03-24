@@ -19,21 +19,102 @@
     html {
       scroll-behavior: smooth;
     }
+    <script>
+  const bg = document.body;
 
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    const maxFade = 400; // adjust fade distance
+
+    let opacity = 0.25 - (scrollY / maxFade) * 0.25;
+    opacity = Math.max(opacity, 0); // don't go negative
+
+    bg.style.setProperty('--bg-opacity', opacity);
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+    
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+  });
+</script>
     body {
       color: #fff;
       background: #000;
     }
 
     /* Background image */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: url('https://github.com/hollowlauncher/hollow-launcher/blob/main/8yyxwfxuyg871.png') center/cover no-repeat;
-      opacity: 0.15;
-      z-index: -1;
-    }
+   body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url('https://github.com/hollowlauncher/hollow-launcher/blob/main/8yyxwfxuyg871.png?raw=true') center/cover no-repeat;
+  opacity: var(--bg-opacity, 0.25);
+  z-index: -1;
+  transition: opacity 0.2s ease;
+}
 
     .container {
       max-width: 1100px;
