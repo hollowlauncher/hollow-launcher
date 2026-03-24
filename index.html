@@ -19,6 +19,289 @@
     html {
       scroll-behavior: smooth;
     }
+ 
+    body {
+      color: #fff;
+      background: #000;
+    }
+
+    /* Background image */
+   body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url('https://cdn.modrinth.com/data/lLqFfGNs/images/a7205115d731077733ab5cdcc639e5531f2dee12.jpeg?raw=true') center/cover no-repeat;
+  opacity: var(--bg-opacity, 0.25);
+  z-index: -1;
+  transition: opacity 0.2s ease;
+}
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 32px;
+      height: 32px;
+    }
+
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .hero {
+      text-align: center;
+      margin-top: 100px;
+      animation: fadeUp 1s ease;
+    }
+
+    .hero h1 {
+      font-size: 64px;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #fff, #888);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      opacity: 0.7;
+      font-size: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 32px;
+      background: #fff;
+      color: #000;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: #ddd;
+    }
+
+    .section {
+      margin-top: 100px;
+      scroll-margin-top: 100px;
+      animation: fadeUp 1s ease;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 32px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #111;
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid #222;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #555;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    .material-symbols-outlined {
+      font-size: 28px;
+      color: #fff;
+    }
+
+    .preview {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 12px;
+      border: 1px solid #333;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+    }
+
+    .preview-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .download-box {
+      background: #111;
+      padding: 50px 30px;
+      border-radius: 12px;
+      border: 1px solid #222;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 120px;
+      padding: 30px 0;
+      text-align: center;
+      color: #666;
+      border-top: 1px solid #222;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="logo">
+      <!-- Replace with your real logo -->
+      <img src="https://github.com/hollowlauncher/hollow-launcher/blob/main/20260322_213749.png?raw=true">
+      <h3>Hollow Launcher</h3>
+    </div>
+
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#preview">Preview</a>
+      <a href="#download">Download</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Hollow Launcher</h1>
+    <p>Minimal. Fast. Minecraft Launcher for Vanilla & Fabric.</p>
+    <a href="https://github.com/hollowlauncher/hollow-launcher/releases/download/Beta/HollowLauncher_1.0.0_x64-setup.exe" class="btn" target="_blank">
+      Download Now
+    </a>
+  </section>
+
+  <section id="features" class="section">
+    <h2>Features</h2>
+
+    <div class="features">
+      <div class="card">
+        <span class="material-symbols-outlined">bolt</span>
+        Ultra fast performance
+      </div>
+
+      <div class="card">
+        <span class="material-symbols-outlined">extension</span>
+        Full Fabric support
+      </div>
+
+      <div class="card">
+        <span class="material-symbols-outlined">sports_esports</span>
+        Vanilla ready
+      </div>
+
+      <div class="card">
+        <span class="material-symbols-outlined">desktop_windows</span>
+        Clean UI
+      </div>
+
+      <div class="card">
+        <span class="material-symbols-outlined">inventory_2</span>
+        Instance management
+      </div>
+
+      <div class="card">
+        <span class="material-symbols-outlined">security</span>
+        Safe & simple downloads
+      </div>
+    </div>
+  </section>
+
+  <section id="preview" class="section">
+    <h2>Launcher Preview</h2>
+    <div class="preview-container">
+      <img src="https://github.com/hollowlauncher/hollow-launcher/blob/main/Screenshot%202026-03-23%20211706.png?raw=true" class="preview">
+    </div>
+  </section>
+
+  <section id="download" class="section">
+    <h2>Get Started</h2>
+
+    <div class="download-box">
+      <p>Get the latest version of Hollow Launcher</p>
+      <a href="https://github.com/hollowlauncher/hollow-launcher/releases/download/Beta/HollowLauncher_1.0.0_x64-setup.exe" class="btn" target="_blank">
+        Download for Windows
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Hollow Launcher 
+  </footer>
+
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hollow Launcher</title>
+  <link rel="icon" type="image/png" href="https://github.com/hollowlauncher/hollow-launcher/blob/main/20260322_213749.png?raw=true">
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
     <script>
   const bg = document.body;
 
@@ -361,6 +644,88 @@
   </footer>
 
 </div>
+<script>
+  const bg = document.body;
 
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    const maxFade = 400; // adjust fade distance
+
+    let opacity = 0.25 - (scrollY / maxFade) * 0.25;
+    opacity = Math.max(opacity, 0); // don't go negative
+
+    bg.style.setProperty('--bg-opacity', opacity);
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+    
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+
+    document.body.style.setProperty('--bg-opacity', opacity);
+  });
+</script>
 </body>
+
+
 </html>
