@@ -447,4 +447,4 @@ MIT License - See LICENSE file
 
 ---
 
-**Built with ❤️ by the Minecraft Launcher Team**
+**Built with ❤️ by the Hollow Launcher Team**
