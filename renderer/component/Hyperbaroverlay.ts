@@ -42,7 +42,7 @@ import {
   Visibility as HudEnabledIcon,
   WbSunny as FullbrightIcon,
 } from '@mui/icons-material';
-import { api } from '../api/client';
+import { api } from '../../api/client';
 import {
   buildHudConfig,
   defaultHudCustomization,
