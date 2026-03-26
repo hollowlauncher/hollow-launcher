@@ -1,4 +1,4 @@
-# 🎮 Minecraft Launcher - Production-Ready Implementation
+# 🎮 Hollow Launcher 
 
 A high-performance, lightweight Minecraft launcher built with Tauri, React, Material UI, and Node.js XMCL backend.
 
