@@ -396,22 +396,7 @@ tauri = { version = "1.5", ... }
 ### Update React/MUI
 ```bash
 npm install @mui/material@latest @mui/icons-material@latest --prefix renderer
-```
 
----
-
-## 📝 Feature Roadmap
-
-- [ ] **Curseforge Integration**: Download mods from Curseforge
-- [ ] **Modrinth Support**: Mod browser from Modrinth
-- [ ] **Auto-Update**: Self-updating launcher
-- [ ] **Multiplayer**: Quick join servers
-- [ ] **Mod Profiles**: Mod pack support
-- [ ] **Custom Skin**: Player skin manager
-- [ ] **Performance Monitor**: FPS overlay
-- [ ] **Cloud Saves**: Save sync to cloud
-
----
 
 ## 📄 License
 
@@ -433,7 +418,6 @@ MIT License - See LICENSE file
 
 - **Issues**: GitHub Issues
 - **Discussions**: GitHub Discussions
-- **Email**: support@minecraftlauncher.dev
 
 ---
 
