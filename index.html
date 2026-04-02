@@ -42,7 +42,50 @@
       transition: opacity .4s;
       pointer-events: none;
     }
+    .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 14px;
+}
 
+/* Animated green dot */
+.dot {
+  width: 10px;
+  height: 10px;
+  background: #00ff88;
+  border-radius: 50%;
+  position: relative;
+}
+
+/* Pulse animation */
+.dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #00ff88;
+  animation: pulse 1.5s infinite;
+  opacity: 0.6;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
     /* ── HEADER ── */
     header {
       position: fixed; inset: 0 0 auto 0;
@@ -302,7 +345,8 @@
   <!-- HERO -->
   <section class="hero">
     <div class="pill">
-      Beta 1.2 is live
+  <span class="dot"></span>
+  Beta 1.2 is live
     </div>
     <h1>Hollow Launcher</h1>
     <p class="hero-sub">Minimal, fast Minecraft launcher<br>for Vanilla &amp; Fabric.</p>
