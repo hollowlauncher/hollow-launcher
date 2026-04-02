@@ -63,7 +63,7 @@
       pointer-events: none;
     }
 
-    /* \u2500\u2500 HEADER \u2500\u2500 */
+    /* ── HEADER ── */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -163,13 +163,13 @@
       .divider { display: none; }
     }
 
-    /* \u2500\u2500 WRAPPER \u2500\u2500 */
+    /* ── WRAPPER ── */
     .page {
       position: relative;
       z-index: 1;
     }
 
-    /* \u2500\u2500 HERO \u2500\u2500 */
+    /* ── HERO ── */
     .hero {
       min-height: 100svh;
       display: flex;
@@ -221,7 +221,7 @@
       animation: fadeUp 0.6s 0.2s ease both;
     }
 
-    /* \u2500\u2500 DOWNLOAD BUTTON \u2500\u2500 */
+    /* ── DOWNLOAD BUTTON ── */
     .btn-download {
       position: relative;
       display: inline-flex;
@@ -297,7 +297,7 @@
       pointer-events: none;
     }
 
-    /* \u2500\u2500 SECTION \u2500\u2500 */
+    /* ── SECTION ── */
     .section {
       padding: 80px 24px;
       max-width: 1000px;
@@ -324,7 +324,7 @@
       margin-bottom: 40px;
     }
 
-    /* \u2500\u2500 FEATURES \u2500\u2500 */
+    /* ── FEATURES ── */
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -390,7 +390,7 @@
       line-height: 1.5;
     }
 
-    /* \u2500\u2500 PREVIEW \u2500\u2500 */
+    /* ── PREVIEW ── */
     .preview-wrap {
       border-radius: 14px;
       overflow: hidden;
@@ -403,7 +403,7 @@
       display: block;
     }
 
-    /* \u2500\u2500 DOWNLOAD SECTION \u2500\u2500 */
+    /* ── DOWNLOAD SECTION ── */
     .download-box {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -431,7 +431,7 @@
       flex-wrap: wrap;
     }
 
-    /* \u2500\u2500 FOOTER \u2500\u2500 */
+    /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
       padding: 28px 24px;
@@ -442,7 +442,7 @@
       z-index: 1;
     }
 
-    /* \u2500\u2500 MATERIAL SYMBOLS HELPER \u2500\u2500 */
+    /* ── MATERIAL SYMBOLS HELPER ── */
     .ms {
       font-family: 'Material Symbols Rounded';
       font-weight: normal;
@@ -459,24 +459,24 @@
       user-select: none;
     }
 
-    /* \u2500\u2500 ANIMATIONS \u2500\u2500 */
+    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(22px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .reveal {
+    .js-ready .reveal {
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.55s ease, transform 0.55s ease;
     }
 
-    .reveal.visible {
+    .js-ready .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* \u2500\u2500 SCROLLBAR \u2500\u2500 */
+    /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: #222; border-radius: 99px; }
@@ -520,7 +520,7 @@
       <span class="ms">fiber_new</span>
       Beta 1.2 is out now
     </div>
-    <h1>Hollow<br>Launcher</h1>
+    <h1>Hollow Launcher</h1>
     <p>Minimal, fast Minecraft launcher for Vanilla &amp; Fabric.</p>
     <a href="https://github.com/hollowlauncher/hollow-launcher/releases/download/beta_1.2/HollowLauncher_1.0.0_x64-setup.exe"
        class="btn-download" id="dlBtn" target="_blank">
@@ -580,4 +580,98 @@
   <section id="download" class="section">
     <p class="section-label reveal">Get it free</p>
     <h2 class="reveal">Download</h2>
-    <div class="
+    <div class="download-box reveal">
+      <p>Latest stable release — always free &amp; open source.</p>
+      <p class="version-tag">Beta 1.2 · Windows x64</p>
+      <div class="platform-row">
+        <a href="https://github.com/hollowlauncher/hollow-launcher/releases/download/beta_1.2/HollowLauncher_1.0.0_x64-setup.exe"
+           class="btn-download" target="_blank">
+          <span class="ms">computer</span>
+          <span>Windows</span>
+        </a>
+        <a href="https://github.com/hollowlauncher/hollow-launcher" class="btn-download"
+           target="_blank" style="background:#111;color:#fff;border:1px solid #222;">
+          <span class="ms" style="font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;">code</span>
+          <span>Source Code</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Hollow Launcher &nbsp;·&nbsp; Open Source under GPL-3.0
+  </footer>
+
+</div>
+
+<script>
+  /* ── Background parallax fade on scroll ── */
+  document.documentElement.classList.add('js-ready');
+  window.addEventListener("scroll", () => {
+    const opacity = Math.max(0, 0.18 - (window.scrollY / 600) * 0.18);
+    document.body.style.setProperty('--bg-opacity', opacity);
+  }, { passive: true });
+
+  /* ── Scroll reveal ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.07 + 's';
+    observer.observe(el);
+  });
+
+  /* ── Ripple + download animation ── */
+  function addRipple(e, btn) {
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height) * 2;
+    const x = (e.clientX || rect.left + rect.width / 2) - rect.left - size / 2;
+    const y = (e.clientY || rect.top + rect.height / 2) - rect.top - size / 2;
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
+    btn.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  }
+
+  document.querySelectorAll('.btn-download').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      addRipple(e, this);
+
+      const icon = this.querySelector('.ms');
+      const text = this.querySelector('span:not(.ms)');
+      if (!icon || !text) return;
+
+      const origIcon = icon.textContent;
+      const origText = text.textContent;
+      const origBg = this.style.background;
+
+      this.classList.add('downloading');
+      icon.textContent = 'downloading';
+      text.textContent = 'Starting…';
+
+      setTimeout(() => {
+        this.classList.remove('downloading');
+        this.classList.add('done');
+        icon.textContent = 'check_circle';
+        text.textContent = 'Done!';
+
+        setTimeout(() => {
+          this.classList.remove('done');
+          icon.textContent = origIcon;
+          text.textContent = origText;
+          if (origBg) this.style.background = origBg;
+        }, 2200);
+      }, 1600);
+    });
+  });
+</script>
+
+</body>
+</html>
