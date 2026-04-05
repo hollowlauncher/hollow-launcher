@@ -1,7 +1,0 @@
-{"level":30,"time":1774257363246,"pid":23920,"hostname":"ASHMEETOP","module":"xmcl-manager","msg":"Initialized XMCL Manager with base dir: C:\\Users\\ASHMEET\\.minecraft-launcher"}
-{"level":30,"time":1774257363276,"pid":23920,"hostname":"ASHMEETOP","module":"sidecar","msg":"HollowLauncher sidecar running on http://localhost:8001"}
-{"level":30,"time":1774257365258,"pid":23920,"hostname":"ASHMEETOP","module":"sidecar","msg":"[GET] /health"}
-{"level":30,"time":1774257365312,"pid":23920,"hostname":"ASHMEETOP","module":"sidecar","msg":"[GET] /api/system/config"}
-{"level":30,"time":1774257365327,"pid":23920,"hostname":"ASHMEETOP","module":"sidecar","msg":"[GET] /api/instances"}
-{"level":30,"time":1774257365327,"pid":23920,"hostname":"ASHMEETOP","module":"instance-manager","msg":"Fetching all instances"}
-{"level":30,"time":1774257365357,"pid":23920,"hostname":"ASHMEETOP","module":"sidecar","msg":"[GET] /api/downloads"}
